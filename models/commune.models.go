@@ -35,7 +35,18 @@ func (c Commune) CodePostal() string {
 	return strings.Join(c.CodesPostaux, ", ")
 }
 
-func (c Commune) LonMin() float64 { return c.Longitude() - 0.08 }
-func (c Commune) LatMin() float64 { return c.Latitude() - 0.05 }
-func (c Commune) LonMax() float64 { return c.Longitude() + 0.08 }
-func (c Commune) LatMax() float64 { return c.Latitude() + 0.05 }
+func (c Commune) LonMin() float64 {
+	return c.Longitude() - 0.08 
+}
+
+func (c Commune) LatMin() float64 { 
+	return c.Latitude() - 0.05 
+}
+
+func (c Commune) LonMax() float64 { 
+	return c.Longitude() + 0.08 
+}
+
+func (c Commune) LatMax() float64 { 
+	return c.Latitude() + 0.05 
+}
