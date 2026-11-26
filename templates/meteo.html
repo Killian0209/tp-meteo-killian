@@ -31,14 +31,12 @@
 <h2>Prévisions sur 7 jours</h2>
 <div class="previsions">
   {{range .Meteo.Jours}}
-    {{range .Meteo.Jours}}
   <div class="jour">
     <span class="jour-nom">{{.Date}}</span>
     <span class="icone">{{.Icone}}</span>
     <span class="temperatures">{{.Max}}° / {{.Min}}°</span>
     <span class="pluie">{{.Rain}} mm</span>
   </div>
-  {{end}}
   {{end}}
 </div>
 

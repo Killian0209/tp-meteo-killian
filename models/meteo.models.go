@@ -1,5 +1,10 @@
 package models
 
+import (
+	"fmt"
+	"time"
+)
+
 type Meteo struct {
 	Current struct {
 		Time        string  `json:"time"`
@@ -44,6 +49,35 @@ func (m Meteo) Description(code int) string {
 		return "Orage"
 	default:
 		return "Conditions inconnues"
+	}
+}
+
+func (m Meteo) Icon(code int) string {
+	switch code {
+	case 0:
+		return "☀️"
+	case 1:
+		return "🌤️"
+	case 2:
+		return "⛅"
+	case 3:
+		return "☁️"
+	case 45, 48:
+		return "🌫️"
+	case 51, 53, 55, 56, 57:
+		return "🌦️"
+	case 61, 63, 65, 66, 67:
+		return "🌧️"
+	case 71, 73, 75, 77:
+		return "❄️"
+	case 80, 81, 82:
+		return "☔"
+	case 85, 86:
+		return "🌨️"
+	case 95, 96, 97, 99:
+		return "⛈️"
+	default:
+		return "🌡️"
 	}
 }
 
