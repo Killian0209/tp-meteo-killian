@@ -61,31 +61,20 @@ func get(endpoint string, dest any) error {
 }
 
 func GetListCommune() ([]models.Commune, error) {
-	var commune []models.Commune
-	err := get("/commune", &commune)
-	return commune, err
+	var communes []models.Commune
+	err := get("?"+fields, &communes)
+	return communes, err
 }
 
 func GetCommune(code int) (models.Commune, error) {
 	var commune models.Commune
-	err := get(fmt.Sprintf("/commune/%d", code), &commune)
+	err := get(fmt.Sprintf("/%d?%s", code, fields), &commune)
 	return commune, err
 }
 
 func SearchCommuneByName(query string) ([]models.Commune, error) {
-	resp, err := http.Get("https://geo.api.gouv.fr/communes?nom=" + url.QueryEscape(query) + "&fields=nom,code,codesPostaux&limit=20")
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API communes: statut %d", resp.StatusCode)
-	}
-
 	var communes []models.Commune
-	if err := json.NewDecoder(resp.Body).Decode(&communes); err != nil {
-		return nil, err
-	}
-	return communes, nil
+	err := get("?nom="+url.QueryEscape(query)+"&limit=20&"+fields, &communes)
+	return communes, err
 }
+
