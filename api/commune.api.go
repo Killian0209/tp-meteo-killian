@@ -13,7 +13,7 @@ import (
 
 const (
 	baseURL   = "https://geo.api.gouv.fr/communes"
-	fields    = "fields=nom,code,centre,population"
+	fields    = "fields=nom,code,codesPostaux,centre,population"
 	userAgent = "meteo-killian"
 )
 
@@ -76,6 +76,3 @@ func SearchCommuneByName(query string) ([]models.Commune, error) {
 	err := get(baseURL+"?nom="+url.QueryEscape(query)+"&limit=20&"+fields, &communes)
 	return communes, err
 }
-
-
- 

@@ -2,6 +2,9 @@
     {
         "nom": "Sucé-sur-Erdre",
         "code": "44201",
+        "codesPostaux": [
+            "44240"
+        ],
         "centre": {
             "type": "Point",
             "coordinates": [
