@@ -26,7 +26,7 @@ func SearchCommune(query string) ([]models.Commune, error) {
 	if query == "" {
 		return nil, models.ErrBadRequest
 	}
-	return api.SearchCommune(query)
+	return api.SearchCommuneByName(query)
 }
 
 
