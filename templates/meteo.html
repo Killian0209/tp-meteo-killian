@@ -3,19 +3,47 @@
 
 <h1>{{.Commune.Name}}</h1>
 <p>Code postal : {{.Commune.CodePostal}}</p>
-<p>{{.Meteo.Description}}</p>
-<p>Température : {{.Meteo.Current.Temp}} °C (ressenti {{.Meteo.Current.Feels}} °C)</p>
-<p>Humidité : {{.Meteo.Current.Humidity}} %</p>
-<p>Vent : {{.Meteo.Current.Wind}} km/h</p>
 
-<iframe
-  class="map"
-  title="Carte de {{.Commune.Name}}"
-  src="https://www.openstreetmap.org/export/embed.html?bbox={{.Commune.LonMin}},{{.Commune.LatMin}},{{.Commune.LonMax}},{{.Commune.LatMax}}&amp;layer=mapnik&amp;marker={{.Commune.Latitude}},{{.Commune.Longitude}}">
-</iframe>
-<p>
-  <a href="https://www.openstreetmap.org/?mlat={{.Commune.Latitude}}&amp;mlon={{.Commune.Longitude}}#map=13/{{.Commune.Latitude}}/{{.Commune.Longitude}}">Agrandir la carte</a>
-</p>
+<div class="grille-meteo">
+  <div class="carte carte-principale">
+    <span class="icone">{{.Meteo.Icon .Meteo.Current.WeatherCode}}</span>
+    <span class="valeur">{{.Meteo.Description .Meteo.Current.WeatherCode}}</span>
+    <span class="libelle">Conditions</span>
+  </div>
+  <div class="carte {{.Meteo.TempClass}}">
+    <span class="valeur">{{.Meteo.Current.Temp}} °C</span>
+    <span class="libelle">Température</span>
+  </div>
+  <div class="carte">
+    <span class="valeur">{{.Meteo.Current.Feels}} °C</span>
+    <span class="libelle">Ressenti</span>
+  </div>
+  <div class="carte">
+    <span class="valeur">{{.Meteo.Current.Humidity}} %</span>
+    <span class="libelle">Humidité</span>
+  </div>
+  <div class="carte">
+    <span class="valeur">{{.Meteo.Current.Wind}} km/h</span>
+    <span class="libelle">Vent</span>
+  </div>
+</div>
+
+<h2>Prévisions sur 7 jours</h2>
+<div class="previsions">
+  {{range .Meteo.Jours}}
+    {{range .Meteo.Jours}}
+  <div class="jour">
+    <span class="jour-nom">{{.Date}}</span>
+    <span class="icone">{{.Icone}}</span>
+    <span class="temperatures">{{.Max}}° / {{.Min}}°</span>
+    <span class="pluie">{{.Rain}} mm</span>
+  </div>
+  {{end}}
+  {{end}}
+</div>
+
+<iframe class="plan" title="Carte"
+  src="https://www.openstreetmap.org/export/embed.html?bbox={{.Commune.LonMin}},{{.Commune.LatMin}},{{.Commune.LonMax}},{{.Commune.LatMax}}&amp;marker={{.Commune.Latitude}},{{.Commune.Longitude}}"></iframe>
 
 {{template "footer"}}
 {{end}}

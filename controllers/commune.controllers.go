@@ -58,7 +58,6 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 	helpers.RenderError(w, http.StatusNotFound, "Cette page n'existe pas.")
 }
 
-// renderAPIError traduit une erreur connue en page d'erreur, sur la route même.
 func renderErrorSevice(w http.ResponseWriter, err error) {
 	switch {
 	case errors.Is(err, models.ErrNotFound):

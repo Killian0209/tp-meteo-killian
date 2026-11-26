@@ -6,13 +6,15 @@
   <button type="submit">Rechercher</button>
 </form>
 
+<div class="communes">
 {{range .}}
   <a href="/commune/{{.Code}}">
     <h2>{{.Name}}</h2>
-    <h3>{{.CodesPostaux}}</h3>
+    <h3>{{.CodePostal}}</h3>
   </a>
 {{else}}
   <p>Aucune Commune trouvée.</p>
 {{end}}
+</div>
 {{template "footer"}}
 {{end}}
