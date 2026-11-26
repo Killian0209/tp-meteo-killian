@@ -3,15 +3,13 @@ package models
 //structure commune
 
 type Commune struct {
-	Name string `json:"nom"`
-	Code string `json:"code"`
+	Name   string `json:"nom"`
+	Code   string `json:"code"`
 	Center Center `json:"centre"`
-	Score float64 `json:"_score"`
+	Pop    int    `json:"population"`
 }
 
 type Center struct {
-	Type string    `json:"type"`
+	Type        string    `json:"type"`
 	Coordinates []float64 `json:"coordinates"`
 }
-
-
