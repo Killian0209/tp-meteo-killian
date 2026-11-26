@@ -1,1 +1,26 @@
 {{define "header"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.}} | Meteo des villes</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+    <body>
+        <header class="site-header">
+            <a class="brand" href="/">Retour au Menu</a>
+            <nav><a href="/commune">Liste des villes</a></nav>
+
+        </header>
+        <main class="container">
+        {{end}}
+
+        {{define "footer"}}
+        </main>
+        <footer class="site-footer">
+            <p>© Killian Morette</p>
+        </footer>
+    </body>
+</html>
+{{end}}
