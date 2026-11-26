@@ -1,0 +1,14 @@
+[
+    {
+        "nom": "Sucé-sur-Erdre",
+        "code": "44201",
+        "centre": {
+            "type": "Point",
+            "coordinates": [
+                -1.5237,
+                47.35
+            ]
+        },
+        "_score": 0.7488023633627462
+    }
+]
