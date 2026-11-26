@@ -21,9 +21,8 @@ var client = &http.Client{
 	Timeout: 5 * time.Second,
 }
 
-func get(endpoint string, dest any) error {
-
-	request, err := http.NewRequest(http.MethodGet, baseURL+endpoint, nil)
+func get(fullURL string, dest any) error {
+	request, err := http.NewRequest(http.MethodGet, fullURL, nil)
 	if err != nil {
 		return fmt.Errorf("création de la requête : %w", err)
 	}
@@ -62,19 +61,21 @@ func get(endpoint string, dest any) error {
 
 func GetListCommune() ([]models.Commune, error) {
 	var communes []models.Commune
-	err := get("?"+fields, &communes)
+	err := get(baseURL+"?"+fields, &communes)
 	return communes, err
 }
 
-func GetCommune(code int) (models.Commune, error) {
+func GetCommune(code string) (models.Commune, error) {
 	var commune models.Commune
-	err := get(fmt.Sprintf("/%d?%s", code, fields), &commune)
+	err := get(fmt.Sprintf("%s/%s?%s", baseURL, url.PathEscape(code), fields), &commune)
 	return commune, err
 }
 
 func SearchCommuneByName(query string) ([]models.Commune, error) {
 	var communes []models.Commune
-	err := get("?nom="+url.QueryEscape(query)+"&limit=20&"+fields, &communes)
+	err := get(baseURL+"?nom="+url.QueryEscape(query)+"&limit=20&"+fields, &communes)
 	return communes, err
 }
 
+
+ 

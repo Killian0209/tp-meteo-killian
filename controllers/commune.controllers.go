@@ -45,12 +45,12 @@ func SearchCommune(w http.ResponseWriter, r *http.Request) {
 
 // ShowCommune affiche la fiche de la Commune dont l'identifiant est dans l'URL.
 func ShowCommune(w http.ResponseWriter, r *http.Request) {
-	commune, err := services.GetCommune(r.PathValue("id"))
+	fiche, err := services.GetFiche(r.PathValue("id"))
 	if err != nil {
 		renderErrorSevice(w, err)
 		return
 	}
-	helpers.Render(w, http.StatusOK, "meteo", commune)
+	helpers.Render(w, http.StatusOK, "meteo", fiche)
 }
 
 // NotFound affiche la page 404 pour toute URL inconnue du site.

@@ -1,7 +1,9 @@
 {{define "meteo"}}
-{{template "header" .Name}}
-<h1>{{.Name}}</h1>
-<p>Code : {{.Code}}</p>
-<p>Population : {{.Pop}}</p>
+{{template "header" .Commune.Name}}
+<h1>{{.Commune.Name}}</h1>
+<p>{{.Meteo.Description}}</p>
+<p>Température : {{.Meteo.Current.Temp}} °C (ressenti {{.Meteo.Current.Feels}} °C)</p>
+<p>Humidité : {{.Meteo.Current.Humidity}} %</p>
+<p>Vent : {{.Meteo.Current.Wind}} km/h</p>
 {{template "footer"}}
 {{end}}

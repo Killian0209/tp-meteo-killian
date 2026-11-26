@@ -1,10 +1,11 @@
 package services
 
 import (
-	"strconv"
+
 	"strings"
 
 	"meteo/api"
+	
 	"meteo/models"
 )
 
@@ -13,12 +14,12 @@ func GetListCommune() ([]models.Commune, error) {
 	return api.GetListCommune()
 }
 
-func GetCommune(idParam string) (models.Commune, error) {
-	id, idErr := strconv.Atoi(idParam)
-	if len(idParam) != 5 || idErr != nil {
+func GetCommune(code string) (models.Commune, error) {
+	code = strings.ToUpper(strings.TrimSpace(code))
+	if len(code) != 5 {
 		return models.Commune{}, models.ErrBadRequest
 	}
-	return api.GetCommune(id)
+	return api.GetCommune(code)
 }
 
 func SearchCommune(query string) ([]models.Commune, error) {
@@ -27,6 +28,25 @@ func SearchCommune(query string) ([]models.Commune, error) {
 		return nil, models.ErrBadRequest
 	}
 	return api.SearchCommuneByName(query)
+}
+
+type Fiche struct {
+	Commune models.Commune
+	Meteo   models.Meteo
+}
+
+func GetFiche(idParam string) (Fiche, error) {
+	commune, err := GetCommune(idParam)
+	if err != nil {
+		return Fiche{}, err
+	}
+
+	meteo, err := api.GetMeteo(commune.Latitude(), commune.Longitude())
+	if err != nil {
+		return Fiche{}, err
+	}
+
+	return Fiche{Commune: commune, Meteo: meteo}, nil
 }
 
 
