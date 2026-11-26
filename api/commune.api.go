@@ -12,7 +12,8 @@ import (
 )
 
 const (
-	baseURL   = "https://geo.api.gouv.fr/communes?fields=nom,code,centre,population"
+	baseURL   = "https://geo.api.gouv.fr/communes"
+	fields    = "fields=nom,code,centre,population"
 	userAgent = "meteo-killian"
 )
 
@@ -65,14 +66,13 @@ func GetListCommune() ([]models.Commune, error) {
 	return commune, err
 }
 
-func GetCommune(id int) (models.Commune, error) {
+func GetCommune(code int) (models.Commune, error) {
 	var commune models.Commune
-	err := get(fmt.Sprintf("/commune/%d", id), &commune)
+	err := get(fmt.Sprintf("/commune/%d", code), &commune)
 	return commune, err
 }
 
 func SearchCommuneByName(query string) ([]models.Commune, error) {
-
 	resp, err := http.Get("https://geo.api.gouv.fr/communes?nom=" + url.QueryEscape(query) + "&fields=nom,code,codesPostaux&limit=20")
 	if err != nil {
 		return nil, err
